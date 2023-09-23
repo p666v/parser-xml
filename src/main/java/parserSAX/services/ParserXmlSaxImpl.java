@@ -1,18 +1,18 @@
 package parserSAX.services;
 
 import org.xml.sax.SAXException;
-import parserSAX.model.Catalog;
+import parserSAX.model.CompactDisc;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
-public class SaxXmlParser implements ParserXml{
+public class ParserXmlSaxImpl implements ParserXml {
 
     @Override
-    public Catalog parse() {
-
+    public Set<CompactDisc> getAll() {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SaxParserHandler handler = new SaxParserHandler();
         SAXParser parser = null;
@@ -21,7 +21,6 @@ public class SaxXmlParser implements ParserXml{
             parser = factory.newSAXParser();
         } catch (Exception e) {
             System.out.println("Open parsing error" + e.toString());
-            return null;
         }
 
         File file = new File("src/main/resources/catalog.xml");
@@ -30,13 +29,13 @@ public class SaxXmlParser implements ParserXml{
             parser.parse(file, handler);
         } catch (SAXException e) {
             System.out.println("Sax parsing error" + e.toString());
-            return null;
         } catch (IOException e) {
             System.out.println("IO parsing error" + e.toString());
-            return null;
         }
 
-        return handler.getCatalog();
+        return handler.getCompactDiscList();
+
+
     }
 
 

@@ -1,8 +1,10 @@
 package parserSAX.services;
 
-import parserSAX.model.Catalog;
+import parserSAX.model.CompactDisc;
+
+import java.util.Set;
 
 public interface ParserXml {
 
-    Catalog parse();
+    Set<CompactDisc> getAll();
 }

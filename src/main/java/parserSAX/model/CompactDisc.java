@@ -2,15 +2,16 @@ package parserSAX.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Data
 public class CompactDisc {
-    private String title;
-    private String artist;
-    private String country;
-    private String company;
-    private double price;
-    private int year;
+    private final String title;
+    private final String artist;
+    private final String country;
+    private final String company;
+    private final double price;
+    private final int year;
 
 }

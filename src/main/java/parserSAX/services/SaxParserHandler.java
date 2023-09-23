@@ -1,45 +1,28 @@
 package parserSAX.services;
 
+import lombok.Getter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import parserSAX.model.Catalog;
 import parserSAX.model.CompactDisc;
 import parserSAX.model.TagXml;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+@Getter
 public class SaxParserHandler extends DefaultHandler {
 
-    private Catalog catalog = new Catalog();
-    private List<CompactDisc> compactDiscList = new ArrayList<>();
-
+    private Set<CompactDisc> compactDiscList = new HashSet<>();
     private String currentTagName;
     private boolean isCatalog = false;
     private boolean isCD = false;
-
     private String title;
     private String artist;
     private String country;
     private String company;
     private double price;
     private int year;
-
-    public Catalog getCatalog() {
-        return catalog;
-    }
-
-    @Override
-    public void startDocument() throws SAXException {
-        super.startDocument();
-    }
-
-    @Override
-    public void endDocument() throws SAXException {
-
-        catalog.setDiscList(compactDiscList);
-    }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -54,7 +37,6 @@ public class SaxParserHandler extends DefaultHandler {
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-
 
         if (qName.equals(String.valueOf(TagXml.CATALOG))) {
             isCatalog = false;
@@ -88,7 +70,6 @@ public class SaxParserHandler extends DefaultHandler {
             } else if (currentTagName.equals(String.valueOf(TagXml.YEAR))) {
                 year = Integer.parseInt(new String(ch, start, length));
             }
-
 
         }
     }

@@ -1,9 +1,20 @@
 package parserSAX.services;
 
-public class AppServiceImpl implements AppService{
+import parserSAX.dao.CatalogDao;
+import parserSAX.dao.CatalogDaoImpl;
+import parserSAX.utils.Props;
+
+public class AppServiceImpl implements AppService {
+    private final ParserXml parserXml = new ParserXmlSaxImpl();
+    private final CatalogDao catalogDao = new CatalogDaoImpl(new Props());
 
     @Override
-    public void printCompactDisc() {
+    public void start() {
+
+        parserXml.getAll();
+
+        catalogDao.insert(parserXml);
 
     }
 }
+
